@@ -16,13 +16,13 @@
 ------------
 Al_lme_prices.csv - Котировки алюминия на London metal exchange  
 Основными "игроками" на рынке алюминия выступают Китай, США, Россия, Бразилия и Австралия, для этого собрана различная информация по странам:  
-*_PMI.csv - индекс производственной активности  
-*_resource_changing.csv - изменение запасов  
-*_inflation.csv - инфляция  
-*_vvp_per_human.csv - ввп на душу населения  
-Trade_Map_exported_* - объемы экспорта  
-Trade_Map_imported_* - объемы импорта  
-Trade_Map_balance_* - экспорт-импорт баланс  
+Country_PMI.csv - индекс производственной активности  
+Country_resource_changing.csv - изменение запасов  
+Country_inflation.csv - инфляция  
+Country_vvp_per_human.csv - ввп на душу населения  
+Trade_Map_exported_country - объемы экспорта  
+Trade_Map_imported_country - объемы импорта  
+Trade_Map_balance_country - экспорт-импорт баланс  
 
 China_Chalco, China-Hongqiao, NOW_Norsk_Hydro, RUS_RUAL, USA_Alcoa_corp, USA_Kaiser - котировки акций крупных компаний по алюминию
 
