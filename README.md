@@ -1,35 +1,69 @@
-HSE-MLHS-projects
+Предсказание стоимости алюминия
 ==============================
+1.Задача
+------------
+Здесь будет описание задачи
+------------
 
-One-year project
+2.Целевая переменная
+------------
+Здесь будет описание таргета
+------------
 
-Project Organization
+3.Исходные данные
+------------
+Al_lme_prices.csv - Котировки алюминия на London metal exchange
+
+Основными "игроками" на рынке алюминия выступают Китай, США, Россия, Бразилия и Австралия, для этого собрана различная информация по странам
+*_PMI.csv - индекс производственной активности
+*_resource_changing.csv - изменение запасов
+*_inflation.csv - инфляция
+*_vvp_per_human.csv - ввп на душу населения
+
+Trade_Map_exported_* - объемы экспорта
+Trade_Map_imported_* - объемы импорта
+Trade_Map_balance_* - экспорт-импорт баланс
+
+China_Chalco, China-Hongqiao, NOW_Norsk_Hydro, RUS_RUAL, USA_Alcoa_corp, USA_Kaiser - котировки акций крупных компаний по алюминию
+
+Bloomberg_Industrial_Metals.csv, FTSE_ChinaA600_Industrial_Metal.csv, S&P_Metals_and_Mining_Select_Industry.csv - индексы
+
+HKD=X - курс гонконгского доллара к доллару
+RUB_CNY - курс рубля к юаню
+USD_RUB - курс доллара к рублю
+
+Большая часть данных в промежутке с 02 января 2018 по 27 октября 2023
+Некоторые помесячные и погодовые, требуется интерполяция, подготовка данных
+------------
+
+4.Метрика 
+------------
+Здесь будет описание метрики
+------------
+
+5.Организация репозитория будет постепенно корректироваться и пополняться информацией
 ------------
 
     ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── Makefile           <- 
     ├── data
-    │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
-    │   ├── processed      <- The final, canonical data sets for modeling.
-    │   └── raw            <- The original, immutable data dump.
+    │   ├── external       <- Данные из внешних источников
+    │   ├── interim        <-
+    │   ├── processed      <-
+    │   └── raw            <-
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs               <-
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── models             <-
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <-
     │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
+    ├── references         <-
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    ├── reports            <-
+    │   └── figures        <-
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── requirements.txt   <-
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
