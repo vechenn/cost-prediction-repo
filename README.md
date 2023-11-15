@@ -29,7 +29,7 @@ China_Chalco, China-Hongqiao, NOW_Norsk_Hydro, RUS_RUAL, USA_Alcoa_corp, USA_Kai
 
 Bloomberg_Industrial_Metals.csv, FTSE_ChinaA600_Industrial_Metal.csv, S&P_Metals_and_Mining_Select_Industry.csv - индексы
 
-HKD=X - курс гонконгского доллара к доллару  
+HKD=X - курс доллара к гонконгскому доллару    
 RUB_CNY - курс рубля к юаню  
 USD_RUB - курс доллара к рублю  
 
