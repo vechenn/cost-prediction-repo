@@ -15,26 +15,10 @@
 
 Исходные данные
 ------------
-Al_lme_prices.csv - стоимость алюминия на LME (London metal exchange)  
-Основными "игроками" на рынке алюминия выступают Китай, США, Россия, Бразилия и Австралия, для этого собрана различная информация по странам:  
-Country_PMI.csv - индекс производственной активности  
-Country_resource_changing.csv - изменение запасов  
-Country_inflation.csv - инфляция  
-Country_vvp_per_human.csv - ввп на душу населения  
-Trade_Map_exported_country - объемы экспорта  
-Trade_Map_imported_country - объемы импорта  
-Trade_Map_balance_country - экспорт-импорт баланс  
-
-China_Chalco, China-Hongqiao, NOW_Norsk_Hydro, RUS_RUAL, USA_Alcoa_corp, USA_Kaiser - котировки акций крупных компаний по алюминию
-
-Bloomberg_Industrial_Metals.csv, FTSE_ChinaA600_Industrial_Metal.csv, S&P_Metals_and_Mining_Select_Industry.csv - индексы
-
-HKD=X - курс доллара к гонконгскому доллару    
-RUB_CNY - курс рубля к юаню  
-USD_RUB - курс доллара к рублю
-
+Основными "игроками" на рынке алюминия выступают Китай, США, Россия, Бразилия и Австралия, для этого собрана различная информация, связанная с данными странами. Собрана информация о котировках акций некоторых компаний, связанных с промыслом алюминия.  
+Подробную информацию об источниках можно найти в docs/source_description.xlsx
 Некоторые данные поступают с задержкой.  
-Некоторые помесячные и погодовые, требуется интерполяция, подготовка данных.  
+Некоторые помесячные/поквартальные, требуется интерполяция, подготовка данных.  
 
 ------------
 
@@ -55,7 +39,7 @@ MAPE
     │   ├── processed      <- Обработанные данные, готовые для использования при моделировании
     │   └── raw            <- Сырые данные, собранные в единный фрейм
     │
-    ├── docs               <-
+    ├── docs               <- Папка содержит excel таблицу с описанием источников
     │
     ├── models             <- Модели в формате *.pkl
     │
@@ -72,10 +56,10 @@ MAPE
     ├── src                <- Source code for use in this project.
     │   ├── __init__.py    <- Makes src a Python module
     │   │
-    │   ├── data           <- Scripts to download or generate data
+    │   ├── data           <- Скрипт для загрузки и компоновки данных в единный фрейм
     │   │   └── make_dataset.py
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
+    │   ├── features       <- Скрипт для генерации необходимых признаков
     │   │   └── build_features.py
     │   │
     │   ├── models         <- Scripts to train models and then use trained models to make
