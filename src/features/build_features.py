@@ -1,10 +1,55 @@
 import numpy as np
 import pandas as pd
-from tsfresh.utilities.dataframe_functions import make_forecasting_frame, impute
-from tsfresh import extract_features, select_features
+import tsfresh
+import logging
+from tsfresh.utilities.dataframe_functions import make_forecasting_frame
+from tsfresh import extract_features
+
+def data_preprocessing(df: pd.DataFrame) -> pd.DataFrame:
+    '''
+    Фукнция выполняет базовую предобработку входных данных:
+    -преобразование в недельные дискреты
+    -логарифмирование некоторых признаков
+    -сглаживание таргета
+    -смещение лагов
+    -заполнение пропусков
+    '''
+    df['hongqiao_volume'] = df['hongqiao_volume'].replace(0, df['hongqiao_volume'].median())
+    df_bfill = df.loc[:,('peru_producer_price_index',
+                         'peru_consumer_price_index',
+                         'export_china_value')].bfill()
+    df_interpol = df.loc[:,('lme_price', 'lme_price_3features',
+                            'bloomberg_metals_price', 'mosexchange_price',
+                            'sp_metals_price', 'hongqiao_price', 'hongqiao_volume',
+                            'norsk_hydro_price')].interpolate(method='time', limit_area='inside')
+    df_fillna = pd.concat([df_interpol, df_bfill], axis=1)
+    del df_bfill,
+    del df_interpol
+
+    df_fillna['log10_hongqiao_volume'] = np.log10(df_fillna['hongqiao_volume'])
+    df_fillna['lme_price_smooth'] = df_fillna.lme_price.rolling(7, min_periods=1).mean()
+    df_fillna.drop(columns=['hongqiao_volume', 'lme_price'], inplace=True)
+
+    dataset_per_week = df_fillna.reset_index().groupby([pd.Grouper(key='date', freq='W')]).mean()
+    del df_fillna
+
+    dict_for_shift = {
+        "export_china_value": 9,
+        "peru_producer_price_index":9,
+        "peru_consumer_price_index":9,
+    }
+    for i in dict_for_shift.items():
+        dataset_per_week[i[0]] = dataset_per_week[i[0]].shift(i[1])
+
+    dataset_per_week = dataset_per_week.iloc[:-1]
+    dataset_per_week.dropna(inplace=True)
+    preprocessed_dataset = dataset_per_week.copy()
+    del dataset_per_week
+    
+    return preprocessed_dataset
 
 def generate_ts_fresh_features(dataset: pd.DataFrame) -> pd.DataFrame:
-    
+    #logging.getLogger('tsfresh').setLevel(logging.WARNING)
     fc_parameters = {
         "abs_energy": None,
         "absolute_maximum": None,
@@ -23,17 +68,17 @@ def generate_ts_fresh_features(dataset: pd.DataFrame) -> pd.DataFrame:
         "root_mean_square": None
     }
     features_for_tsfresh = ["lme_price_smooth",
-                        "lme_price_3features",
-                        "peru_producer_price_index",
-                        "sp_metals_price",
-                        "peru_consumer_price_index",
-                        "log10_hongqiao_volume",
-                        "hongqiao_price",
-                        "bloomberg_metals_price",
-                        "mosexchange_price",
-                        "norsk_hydro_price",
-                        "export_china_value"
-                        ]
+                            "lme_price_3features",
+                            "peru_producer_price_index",
+                            "sp_metals_price",
+                            "peru_consumer_price_index",
+                            "log10_hongqiao_volume",
+                            "hongqiao_price",
+                            "bloomberg_metals_price",
+                            "mosexchange_price",
+                            "norsk_hydro_price",
+                            "export_china_value"
+                            ]
 
     short_list = ['value__abs_energy_lme_price_3features_4_weeks',
                   'value__abs_energy_peru_producer_price_index_12_weeks',
@@ -60,8 +105,8 @@ def generate_ts_fresh_features(dataset: pd.DataFrame) -> pd.DataFrame:
     cnt = 0
     
     extracted_features = pd.DataFrame(index=pd.date_range(start=dataset.index.min().strftime("%Y-%m-%d"), 
-                                                                   end=dataset.index.max().strftime("%Y-%m-%d"), 
-                                                                   freq='W'))
+                                                          end=dataset.index.max().strftime("%Y-%m-%d"), 
+                                                          freq='W'))
     extracted_features.index.name = 'date' # create frame with index 'date'
     #list_of_columns = dataset.columns.values.copy()
     for i in features_for_tsfresh: # loop over exogenous features
@@ -90,13 +135,29 @@ def generate_ts_fresh_features(dataset: pd.DataFrame) -> pd.DataFrame:
         #print("Created features for", i)
         print(f"Left {len(features_for_tsfresh) - cnt} features")
     extracted_features = extracted_features.loc[:, short_list]
+    extracted_features = extracted_features.iloc[1:]
+    extracted_features = extracted_features.join(dataset["lme_price_smooth"], on='date', how='left')
     return extracted_features
 
 if __name__ == "__main__":
-    import sys
-    input_file = sys.argv[1]
-    output_file = sys.argv[2]
+    import os
+    current_dir = os.path.dirname(__file__)
+
+    path_to_input = os.path.join(current_dir, '..', '..', 'data', 'raw')
+    path_to_input = os.path.abspath(path_to_input)
+    input_file_name = '/dataset_with_raw_data.csv'
+
+    path_to_output = os.path.join(current_dir, '..', '..', 'data', 'processed')
+    path_to_output = os.path.abspath(path_to_output)
+    output_file_name = '/prepared_data.csv'
+
+    input_file = path_to_input+input_file_name
+    output_file = path_to_output+output_file_name
     
     df = pd.read_csv(input_file, parse_dates=True, index_col=0) # read input file
-    extracted_features = generate_ts_fresh_features(df) # generate new features 
+    print("Start data preprocessing.")
+    preprocessed_dataset = data_preprocessing(df=df)
+    print("Start feature extraction.")
+    extracted_features = generate_ts_fresh_features(dataset=preprocessed_dataset) # generate new features 
+    print("Save prepared data.")
     extracted_features.to_csv(output_file) # save extracted deatures
