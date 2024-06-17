@@ -137,6 +137,7 @@ def generate_ts_fresh_features(dataset: pd.DataFrame) -> pd.DataFrame:
     extracted_features = extracted_features.loc[:, short_list]
     extracted_features = extracted_features.iloc[1:]
     extracted_features = extracted_features.join(dataset["lme_price_smooth"], on='date', how='left')
+    extracted_features = extracted_features.iloc[:-8]
     return extracted_features
 
 if __name__ == "__main__":
