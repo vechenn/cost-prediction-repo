@@ -4,7 +4,7 @@ from darts.models import CatBoostModel
 
 def make_forecast(dataset: pd.DataFrame):
 
-    features = list(df.columns.values)
+    features = list(dataset.columns.values)
     features.remove('date')
     features.remove('lme_price_smooth')
     # Aluminium price
