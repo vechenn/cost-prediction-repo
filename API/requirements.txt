@@ -1,4 +1,4 @@
 uvicorn
 pandas
 fastapi
-io
+pydantic
