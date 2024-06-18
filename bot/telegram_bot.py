@@ -3,7 +3,7 @@ from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, filters, ContextTypes
 
 TELEGRAM_TOKEN = '7356627228:AAEk6G-hk5DYNxS5aPVhSQl6BnqAp4Aq-n4'
-FASTAPI_URL = 'https://aluminium-cost-prediction.onrender.com/predict'
+FASTAPI_URL = 'http://127.0.0.1:8000/predict'
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Привет! Отправьте мне CSV-файл для предсказания.')
