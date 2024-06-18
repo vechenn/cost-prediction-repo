@@ -146,7 +146,8 @@ if __name__ == "__main__":
 
     path_to_input = os.path.join(current_dir, '..', '..', 'data', 'raw')
     path_to_input = os.path.abspath(path_to_input)
-    input_file_name = '/dataset_with_raw_data.csv'
+    #input_file_name = '/dataset_with_raw_data.csv'
+    input_file_name = '/raw_data.csv'
 
     path_to_output = os.path.join(current_dir, '..', '..', 'data', 'processed')
     path_to_output = os.path.abspath(path_to_output)
