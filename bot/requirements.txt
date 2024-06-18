@@ -7,3 +7,5 @@ optuna==3.6.1
 u8darts==0.29.0
 numpy==1.26.3
 python-multipart==0.0.6
+requests==2.31.0
+python-telegram-bot==21.3
