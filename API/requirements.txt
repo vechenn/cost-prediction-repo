@@ -2,3 +2,7 @@ uvicorn
 pandas
 fastapi
 pydantic
+tsfresh
+optuna
+u8darts-notorch
+numpy
