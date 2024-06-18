@@ -26,7 +26,8 @@ if __name__ == "__main__":
     current_dir = os.path.dirname(__file__)
     path_to_input = os.path.join(current_dir, '..', '..', 'data', 'processed')
     path_to_input = os.path.abspath(path_to_input)
-    input_file_name = '/prepared_data.csv'
+    #input_file_name = '/prepared_data.csv'
+    input_file_name = '/data.csv'
 
     df = pd.read_csv(path_to_input+input_file_name, parse_dates=[0], dtype='float32')
     prediction_array = make_forecast(dataset=df)
