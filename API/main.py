@@ -18,6 +18,10 @@ class PredictionResponse(BaseModel):
     week_3: float
     week_4: float
 
+@app.get('/', summary='Root')
+def root():
+    return {'Привет! Отправьте мне CSV-файл для предсказания.'}
+
 @app.post("/predict", response_model=PredictionResponse)
 async def predict(file: UploadFile = File(...)):
     # Преобразуем файл в DataFrame
