@@ -4,5 +4,5 @@ fastapi
 pydantic
 tsfresh
 optuna
-u8darts-notorch
+u8darts
 numpy
