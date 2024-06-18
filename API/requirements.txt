@@ -6,3 +6,4 @@ tsfresh==0.20.2
 optuna==3.6.1
 u8darts==0.29.0
 numpy==1.26.3
+python-multipart==0.0.6
