@@ -50,11 +50,11 @@ MAPE
     ├── reports            <-
     │   └── figures        <-
     │
-    ├── requirements.txt   <-
+    ├── requirements.txt   <- conda create --name aluminium --file requirements.txt
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── setup.py           <- 
     ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
+    │   ├── __init__.py    <- 
     │   │
     │   ├── data           <- Скрипт для загрузки и компоновки данных в единный фрейм
     │   │   └── make_dataset.py
@@ -62,15 +62,15 @@ MAPE
     │   ├── features       <- Скрипт для генерации необходимых признаков
     │   │   └── build_features.py
     │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
+    │   ├── models         <- Скрипты для подбора гиперпараметров, обучения и прогноза модели
+    │   │   │                 
     │   │   ├── predict_model.py
     │   │   └── train_model.py
     │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │   └── visualization  <- 
     │       └── visualize.py
     │
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    └── tox.ini            <- 
 
 
 --------

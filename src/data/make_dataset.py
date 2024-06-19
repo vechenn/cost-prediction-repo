@@ -450,9 +450,7 @@ def main():
     path_to_save = os.path.join(current_dir, '..', '..', 'data', 'raw')
     # Преобразуем путь в абсолютный
     path_to_save = os.path.abspath(path_to_save)
-    #file_name = '/dataset_with_raw_data.csv'
-    file_name = '/raw_data.csv'
-    df = df.loc['2023-01-01':].copy()
+    file_name = '/dataset_with_raw_data.csv'
     df.to_csv(path_to_save+file_name)
 
 if __name__ == "__main__":
